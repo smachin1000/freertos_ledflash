@@ -25,7 +25,6 @@ RM := rm -rf
 -include BSP/spi_flash_driver/subdir.mk
 -include BSP/oled_driver/subdir.mk
 -include BSP/i2c_driver/subdir.mk
--include BSP/emc_driver/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)

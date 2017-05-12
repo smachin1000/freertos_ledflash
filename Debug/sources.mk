@@ -34,7 +34,6 @@ CMSIS/startup_gcc \
 BSP/spi_flash_driver \
 BSP/oled_driver \
 BSP/i2c_driver \
-BSP/emc_driver \
 
 ################################################################################
 # Actel SoftConsole IDE Variables
