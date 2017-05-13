@@ -27,19 +27,7 @@
 /**************************************************************************/
 
 #include "FreeRTOS.h"
-#include "semphr.h"
-
-
-void delay(volatile unsigned int n)
-{
-    while(n != 0) {
-        n--;
-    }
-}
-
-/**************************************************************************/
-/* Function LED initialization */
-/**************************************************************************/
+#include "task.h"
 
 void led_initialization()
 {
@@ -67,7 +55,7 @@ void led_test()
     uint32_t gpio_pattern = MSS_GPIO_get_outputs();
     gpio_pattern ^= 0xFFFFFFFF;
     MSS_GPIO_set_outputs( gpio_pattern );
-    delay(100000);
+    vTaskDelay(configTICK_RATE_HZ / 2);
 }
 
 /**************************************************************************/

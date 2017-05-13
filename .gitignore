@@ -4,4 +4,4 @@
 *.lst
 *.srec
 Debug/memory-map.xml
-Debug/SmartFusion_Webserver_Demo
+Debug/freertos_ledflash
