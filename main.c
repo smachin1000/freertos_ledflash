@@ -17,8 +17,6 @@
 #define SYS_TICK_FCLK_DIV_32_NO_REF_CLK   0x31000000
 #define ENABLE_SYS_TICK                   0x7
 
-xTaskHandle ledTaskHndl = NULL;
-
 extern void led_task(void *para);
 extern void led_initialization(void);
 
@@ -34,16 +32,21 @@ void init_system()
 
 int main()
 {
+	int c;
     /* Initialization all necessary hardware components */
     init_system();
 
-    xTaskCreate( led_task,
-                 ( signed portCHAR * ) "led_task",
-                 configMINIMAL_STACK_SIZE,
-                 NULL,
-                 tskIDLE_PRIORITY +1,
-                 &ledTaskHndl );
+    c = xTaskCreate( led_task,						// task "run" function
+				 ( signed portCHAR * ) "led_task",  // task name
+                 configMINIMAL_STACK_SIZE,			// task stack size in 32 bit words
+                 NULL,								// params to pass to run function
+                 tskIDLE_PRIORITY + 1,				// task priority
+                 NULL );							// task handle
 
+	if (c != pdPASS) {
+		printf("task create failed with code %d, exiting\n", c);
+		return 1;
+	}
     /* Enable the SYS TICK Timer and provide the divider and clock source
      * this is required to enable the RTOS tick */
     *(volatile unsigned long *)SYS_TICK_CTRL_AND_STATUS_REG = ENABLE_SYS_TICK;
