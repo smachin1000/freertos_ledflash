@@ -6,3 +6,4 @@
 *.srec
 Debug/memory-map.xml
 Debug/freertos_ledflash
+Debug/*
