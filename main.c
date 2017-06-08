@@ -20,6 +20,13 @@
 extern void led_task(void *para);
 extern void led_initialization(void);
 
+// Disable STDIO buffering for serial I/O
+static void configure_buffering()
+{
+    setvbuf(stdout, 0, _IONBF, 0);
+    setvbuf(stdin, 0, _IONBF, 0);
+}
+
 void init_system()
 {
     /* Disable the Watch Dog Timer */
@@ -35,6 +42,8 @@ int main()
 	int c;
     /* Initialization all necessary hardware components */
     init_system();
+
+    configure_buffering();
 
     c = xTaskCreate( led_task,						// task "run" function
 				 ( signed portCHAR * ) "led_task",  // task name
